@@ -1,0 +1,26 @@
+/* App-level overrides and resets that aren't pure design tokens */
+
+/* Ensure the app fills the full viewport height */
+#root > * {
+  flex: 1;
+  min-height: 0;
+}
+
+/* Login page fills the full screen */
+.login-root {
+  flex: 1;
+}
+
+/* Shell fills the full available space */
+.shell {
+  flex: 1;
+}
+
+.shell-content {
+  animation: page-fade 180ms ease;
+}
+
+@keyframes page-fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}

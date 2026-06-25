@@ -1,0 +1,95 @@
+.thread {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  color: var(--slate);
+}
+
+/* ---- sizes ---- */
+.thread--sm { font-size: var(--text-xs); }
+.thread--sm .thread-dot { width: 6px; height: 6px; }
+.thread--sm .thread-seg { width: 10px; }
+
+.thread--md { font-size: var(--text-xs); }
+.thread--md .thread-dot { width: 8px; height: 8px; }
+.thread--md .thread-seg { width: 18px; }
+
+.thread--lg { font-size: var(--text-sm); }
+.thread--lg .thread-dot { width: 10px; height: 10px; }
+.thread--lg .thread-seg { width: 36px; }
+
+.thread-node {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.thread-dot {
+  border-radius: 50%;
+  background: var(--line);
+  border: 1.5px solid var(--line);
+  display: inline-block;
+  flex-shrink: 0;
+  transition: background var(--dur-med) var(--ease), border-color var(--dur-med) var(--ease);
+}
+
+.thread-node--done .thread-dot {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.thread-node--current .thread-dot {
+  background: var(--vermilion);
+  border-color: var(--vermilion);
+  box-shadow: 0 0 0 3px var(--vermilion-10);
+}
+
+.thread-node--upcoming .thread-dot {
+  background: transparent;
+}
+
+.thread-label {
+  white-space: nowrap;
+  color: var(--slate-dim);
+  font-weight: 500;
+}
+
+.thread-node--done .thread-label { color: var(--ink-text); }
+.thread-node--current .thread-label { color: var(--vermilion-dim); font-weight: 600; }
+
+.thread-seg {
+  height: 1px;
+  background-image: linear-gradient(to right, var(--line) 0 4px, transparent 4px 7px);
+  background-size: 7px 1px;
+  background-repeat: repeat-x;
+  flex-shrink: 0;
+}
+
+.thread-seg--done {
+  background-image: none;
+  background-color: var(--ink);
+  opacity: 0.55;
+}
+
+/* ---- off-path break ---- */
+.thread--off { color: var(--slate); }
+
+.thread-break {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 4px;
+  color: var(--red);
+  flex-shrink: 0;
+}
+
+.thread-node--final .thread-dot--final {
+  background: var(--final-color, var(--red));
+  border-color: var(--final-color, var(--red));
+}
+
+/* hide trailing stage labels visually when off-path but keep dim dots for context */
+.thread--off .thread-node--upcoming .thread-dot {
+  opacity: 0.35;
+}
