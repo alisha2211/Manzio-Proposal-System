@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
+import authService from '../services/authService';
 import './Login.css';
 
-const DEMO_USERS = [
-  { role: 'admin',      name: 'Alex Rivera',  email: 'admin@manzio.com',   password: 'admin123',   avatarColor: '#FF4D2E', icon: '👑' },
-  { role: 'management', name: 'Jordan Blake', email: 'manager@manzio.com', password: 'manager123', avatarColor: '#5B8DEF', icon: '📋' },
-  { role: 'sales',      name: 'Morgan Chen',  email: 'sales@manzio.com',   password: 'sales123',   avatarColor: '#1A8754', icon: '💼' },
+const ROLES = [
+  { role: 'admin',      label: 'Admin',   icon: '🛡️' },
+  { role: 'management', label: 'Manager', icon: '💼' },
 ];
 
 export default function Login({ onLogin }) {
@@ -17,11 +17,21 @@ export default function Login({ onLogin }) {
   const [remember, setRemember]         = useState(false);
   const [toast, setToast]               = useState('');
 
-  function pickRole(u) {
-    setSelectedRole(u.role);
-    setEmail(u.email);
-    setPassword(u.password);
+  useEffect(() => {
+    setEmail('admin@manzio.com');
+    setPassword('admin123');
+  }, []);
+
+  function pickRole(role) {
+    setSelectedRole(role);
     setError('');
+    if (role === 'admin') {
+      setEmail('admin@manzio.com');
+      setPassword('admin123');
+    } else if (role === 'management') {
+      setEmail('manager@manzio.com');
+      setPassword('manager123');
+    }
   }
 
   async function handleSubmit(e) {
@@ -32,15 +42,18 @@ export default function Login({ onLogin }) {
     if (!password)     return setError('Please enter your password.');
 
     setLoading(true);
-    await new Promise(r => setTimeout(r, 800));
 
-    const match = DEMO_USERS.find(u => u.email === email.trim() && u.password === password);
-
-    if (match) {
-      setToast(`Welcome back, ${match.name}!`);
-      setTimeout(() => onLogin(match), 900);
-    } else {
-      setError('Invalid credentials. Try a demo account below.');
+    try {
+      const res = await authService.login(email.trim(), password);
+      if (res.success) {
+        setToast(`Welcome back, ${res.user.name}!`);
+        setTimeout(() => onLogin(res.user), 900);
+      } else {
+        setError(res.message || 'Invalid email or password. Please try again.');
+        setLoading(false);
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || 'Connection error. Please make sure backend is running.');
       setLoading(false);
     }
   }
@@ -65,7 +78,6 @@ export default function Login({ onLogin }) {
         </div>
       )}
 
-      {/* Centered layout container holding left branding info, centered login card, and right spacer */}
       <div className="login-container">
         
         {/* Left Column: Brand Text & Info */}
@@ -85,7 +97,7 @@ export default function Login({ onLogin }) {
           </p>
           <div className="login-brand-features">
             {[
-              'Role-based access for sales, management & admin',
+              'Role-based access for management & admin',
               'Real-time proposal status tracking',
               'One-click PDF generation & email delivery',
             ].map((f, i) => (
@@ -97,7 +109,7 @@ export default function Login({ onLogin }) {
           </div>
         </div>
 
-        {/* Center Column: Centered Glassmorphism Login Card */}
+        {/* Center Column: Glassmorphism Login Card */}
         <div className="login-panel">
           <div className="login-card">
             
@@ -113,17 +125,15 @@ export default function Login({ onLogin }) {
               <div className="login-field">
                 <span className="login-label">Select role</span>
                 <div className="login-roles">
-                  {DEMO_USERS.map(u => (
+                  {ROLES.map(r => (
                     <button
-                      key={u.role}
+                      key={r.role}
                       type="button"
-                      className={`login-role-btn ${selectedRole === u.role ? 'is-selected' : ''}`}
-                      onClick={() => pickRole(u)}
+                      className={`login-role-btn ${selectedRole === r.role ? 'is-selected' : ''}`}
+                      onClick={() => pickRole(r.role)}
                     >
-                      <span className="login-role-btn__icon">{u.icon}</span>
-                      <span className="login-role-btn__name">
-                        {u.role === 'sales' ? 'Sales' : u.role === 'management' ? 'Manager' : 'Admin'}
-                      </span>
+                      <span className="login-role-btn__icon">{r.icon}</span>
+                      <span className="login-role-btn__name">{r.label}</span>
                     </button>
                   ))}
                 </div>
@@ -208,7 +218,8 @@ export default function Login({ onLogin }) {
                   />
                   Remember me
                 </label>
-                <button type="button" className="login-forgot" onClick={() => alert('Password reset is not available in demo mode.')}>
+                <button type="button" className="login-forgot" onClick={() => alert('Please contact your system administrator to reset your password.')}
+                >
                   Forgot password?
                 </button>
               </div>
@@ -244,22 +255,18 @@ export default function Login({ onLogin }) {
               </button>
             </form>
 
-            {/* Demo hint */}
-            <div className="login-demo-hint">
-              <strong>Demo mode</strong> — click a role card to auto-fill credentials.<br />
-              Passwords: <strong>admin123</strong> · <strong>manager123</strong> · <strong>sales123</strong>
-            </div>
+
           </div>
         </div>
 
-        {/* Right Column: Spacer to balance the brand panel and keep card dead-center */}
+        {/* Right Column: Spacer */}
         <div className="login-spacer" />
 
       </div>
 
       {/* Footer */}
       <p className="login-footer">
-        © 2025 Manzio Technologies. All rights reserved.
+        © 2025 Manzio . All rights reserved.
       </p>
     </div>
   );

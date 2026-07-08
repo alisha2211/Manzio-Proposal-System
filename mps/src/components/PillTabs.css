@@ -1,0 +1,28 @@
+/* PillTabs component styling */
+.pill-tabs {
+  display: flex;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--sp-4);
+}
+
+.pill-tab {
+  background: var(--gray-100);
+  color: var(--text-primary);
+  border: none;
+  border-radius: var(--r-full);
+  padding: var(--sp-2) var(--sp-4);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+
+.pill-tab:hover {
+  background: var(--gray-200);
+}
+
+.pill-tab.active {
+  background: var(--primary);
+  color: var(--text-inverse);
+}

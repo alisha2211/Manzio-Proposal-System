@@ -1,0 +1,14 @@
+{
+  "name": "manzio-proposal-system-root",
+  "version": "1.0.0",
+  "description": "Root workspace to manage frontend and backend of Manzio Proposal System",
+  "scripts": {
+    "install:all": "npm install --prefix mps && npm install --prefix backend && npm install",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix mps",
+    "start": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

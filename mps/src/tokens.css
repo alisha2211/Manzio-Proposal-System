@@ -1,94 +1,188 @@
 /* =========================================================
    MANZIO PROPOSAL SYSTEM — DESIGN TOKENS
-   A studio-built internal tool. Ledger logic, not SaaS-card logic.
+   Brand Identity: Primary Blue #2563EB, modern, premium
    ========================================================= */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 :root {
-  /* ---- Color: named, deliberate ---- */
-  --ink:          #0B0D12;   /* near-black, primary surface dark */
-  --ink-soft:     #14171F;   /* secondary dark surface */
-  --paper:        #F7F6F2;   /* warm paper, primary light surface */
-  --paper-dim:    #EDEBE3;   /* recessed paper surface */
-  --line:         #DEDAD0;   /* hairline borders on paper */
-  --line-dark:    #262A35;   /* hairline borders on ink */
+  /* ---- Brand Colors ---- */
+  --primary:        #2563EB;
+  --primary-hover:  #1D4ED8;
+  --primary-light:  #DBEAFE;
+  --primary-10:     rgba(37, 99, 235, 0.1);
+  --primary-20:     rgba(37, 99, 235, 0.2);
 
-  --vermilion:    #FF4D2E;   /* Manzio spark — CTA, brand, active state */
-  --vermilion-dim:#C73D22;
-  --vermilion-10: rgba(255, 77, 46, 0.1);
+  /* ---- Surfaces ---- */
+  --bg:             #F8FAFC;
+  --bg-card:        #FFFFFF;
+  --bg-elevated:    #FFFFFF;
+  --bg-inset:       #F1F5F9;
 
-  --blue:         #5B8DEF;   /* in-progress / sent */
-  --blue-10:      rgba(91, 141, 239, 0.12);
+  /* ---- Text ---- */
+  --text-dark:      #0F172A;
+  --text-primary:   #1E293B;
+  --text-secondary: #64748B;
+  --text-muted:     #94A3B8;
+  --text-inverse:   #FFFFFF;
 
-  --green:        #1A8754;   /* accepted / approved */
-  --green-10:     rgba(26, 135, 84, 0.1);
+  /* ---- Semantic Colors ---- */
+  --success:        #22C55E;
+  --success-light:  #DCFCE7;
+  --success-10:     rgba(34, 197, 94, 0.1);
+  --warning:        #F59E0B;
+  --warning-light:  #FEF3C7;
+  --warning-10:     rgba(245, 158, 11, 0.1);
+  --danger:         #EF4444;
+  --danger-light:   #FEE2E2;
+  --danger-10:      rgba(239, 68, 68, 0.1);
+  --info:           #3B82F6;
+  --info-light:     #DBEAFE;
+  --info-10:        rgba(59, 130, 246, 0.1);
 
-  --amber:        #C98A1F;   /* pending / awaiting */
-  --amber-10:     rgba(201, 138, 31, 0.1);
+  /* ---- Neutrals ---- */
+  --gray-50:        #F8FAFC;
+  --gray-100:       #F1F5F9;
+  --gray-200:       #E2E8F0;
+  --gray-300:       #CBD5E1;
+  --gray-400:       #94A3B8;
+  --gray-500:       #64748B;
+  --gray-600:       #475569;
+  --gray-700:       #334155;
+  --gray-800:       #1E293B;
+  --gray-900:       #0F172A;
 
-  --red:          #C73838;   /* rejected / expired */
-  --red-10:       rgba(199, 56, 56, 0.1);
+  /* ---- Borders ---- */
+  --border:         #E2E8F0;
+  --border-light:   #F1F5F9;
+  --border-focus:   var(--primary);
 
-  --slate:        #8A8F98;   /* meta text, secondary */
-  --slate-dim:    #5C616B;
+  /* ---- Typography ---- */
+  --font-sans:      'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:      'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
 
-  --ink-text:     #14171F;
-  --paper-text:   #F4F2EC;
+  --fw-regular:     400;
+  --fw-medium:      500;
+  --fw-semibold:    600;
+  --fw-bold:        700;
 
-  /* ---- Type ---- */
-  --font-display: 'Fraunces', 'Georgia', serif;
-  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono:    'JetBrains Mono', 'SF Mono', monospace;
-
-  /* ---- Scale ---- */
-  --text-xs:   0.6875rem;
-  --text-sm:   0.8125rem;
-  --text-base: 0.9375rem;
-  --text-md:   1.0625rem;
-  --text-lg:   1.375rem;
-  --text-xl:   1.875rem;
-  --text-2xl:  2.5rem;
-  --text-3xl:  3.5rem;
+  /* ---- Type Scale ---- */
+  --text-xs:        0.75rem;    /* 12px */
+  --text-sm:        0.875rem;   /* 14px — body text */
+  --text-base:      1rem;       /* 16px — card titles */
+  --text-lg:        1.125rem;   /* 18px */
+  --text-xl:        1.25rem;    /* 20px — section titles */
+  --text-2xl:       1.5rem;     /* 24px */
+  --text-3xl:       2rem;       /* 32px — dashboard heading */
 
   /* ---- Spacing ---- */
-  --sp-1: 4px;
-  --sp-2: 8px;
-  --sp-3: 12px;
-  --sp-4: 16px;
-  --sp-5: 20px;
-  --sp-6: 24px;
-  --sp-8: 32px;
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;    /* content padding */
+  --sp-8:  32px;
   --sp-10: 40px;
   --sp-12: 48px;
   --sp-16: 64px;
 
-  /* ---- Radius: tight, drafting-table, not bubbly ---- */
-  --r-sm: 3px;
-  --r-md: 6px;
-  --r-lg: 10px;
+  /* ---- Layout ---- */
+  --sidebar-width:     280px;
+  --sidebar-collapsed: 72px;
+  --content-padding:   24px;
+  --topbar-height:     64px;
 
-  /* ---- Shadow: minimal, used for true elevation only ---- */
-  --shadow-sm: 0 1px 2px rgba(11, 13, 18, 0.06);
-  --shadow-md: 0 4px 16px rgba(11, 13, 18, 0.10);
-  --shadow-lg: 0 12px 40px rgba(11, 13, 18, 0.18);
+  /* ---- Radius ---- */
+  --r-sm:   6px;
+  --r-md:   8px;
+  --r-lg:   12px;    /* buttons */
+  --r-xl:   16px;    /* cards */
+  --r-full: 9999px;
+
+  /* ---- Shadows ---- */
+  --shadow-xs:  0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md:  0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg:  0 8px 30px rgba(0, 0, 0, 0.06);
+  --shadow-xl:  0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.06);
+  --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.06);
 
   /* ---- Motion ---- */
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --dur-fast: 120ms;
-  --dur-med: 220ms;
+  --ease:       cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out:   cubic-bezier(0, 0, 0.2, 1);
+  --ease-in:    cubic-bezier(0.4, 0, 1, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast:   150ms;
+  --dur-med:    250ms;
+  --dur-slow:   400ms;
+
+  /* ---- Z-index ---- */
+  --z-dropdown: 50;
+  --z-sticky:   100;
+  --z-overlay:  200;
+  --z-modal:    300;
+  --z-toast:    400;
+  --z-palette:  500;
+
+  /* ---- Legacy compatibility aliases ---- */
+  --ink:           #0F172A;
+  --ink-text:      #1E293B;
+  --paper:         #FFFFFF;
+  --paper-dim:     #F1F5F9;
+  --line:          #E2E8F0;
+  --slate:         #64748B;
+  --slate-dim:     #94A3B8;
+  --vermilion:     #2563EB;
+  --vermilion-dim: #1D4ED8;
+  --vermilion-10:  rgba(37, 99, 235, 0.1);
+  --red:           #EF4444;
+  --red-10:        rgba(239, 68, 68, 0.1);
+  --amber:         #F59E0B;
+  --amber-10:      rgba(245, 158, 11, 0.1);
+  --blue:          #3B82F6;
+  --blue-10:       rgba(59, 130, 246, 0.1);
+  --green:         #22C55E;
+  --green-10:      rgba(34, 197, 94, 0.1);
+  --font-display:  var(--font-sans);
+  --text-md:       var(--text-base);
+
+  /* ---- Gradient Variables ---- */
+  --gradient-primary: linear-gradient(135deg, var(--primary), #7C3AED);
+  --gradient-accent: linear-gradient(135deg, #7C3AED, var(--primary));
+
+  /* ---- Utility Animation Tokens ---- */
+  --anim-fade-in: fadeIn var(--dur-med) var(--ease) forwards;
+  --anim-slide-in-right: slideInRight var(--dur-fast) var(--ease) forwards;
+  --anim-pulse: pulse var(--dur-slow) var(--ease) infinite;
+
 }
 
-* { box-sizing: border-box; }
+/* Dark mode intentionally disabled — light theme only */
+
+
+/* =========================================================
+   RESET & BASE
+   ========================================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
 html, body {
   height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
-  background: var(--paper);
-  color: var(--ink-text);
-  font-family: var(--font-body);
-  font-size: var(--text-base);
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--dur-med) var(--ease),
+              color var(--dur-med) var(--ease);
 }
 
 #root {
@@ -98,25 +192,51 @@ html, body {
   flex-direction: column;
 }
 
-a { color: inherit; text-decoration: none; }
-button { font-family: inherit; cursor: pointer; }
-input, select, textarea { font-family: inherit; }
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
-::selection { background: var(--vermilion); color: white; }
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+}
 
-/* Scrollbars: quiet, ledger-like */
-::-webkit-scrollbar { width: 8px; height: 8px; }
+input, select, textarea {
+  font-family: inherit;
+}
+
+::selection {
+  background: var(--primary);
+  color: white;
+}
+
+/* ---- Scrollbars ---- */
+::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--slate); }
+::-webkit-scrollbar-thumb {
+  background: var(--gray-300);
+  border-radius: var(--r-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-400);
+}
 
-/* Focus visibility — accessibility floor */
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--gray-600);
+}
+
+/* ---- Focus states ---- */
 :focus-visible {
-  outline: 2px solid var(--vermilion);
+  outline: 2px solid var(--primary);
   outline-offset: 2px;
   border-radius: var(--r-sm);
 }
 
+/* ---- Reduced motion ---- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
@@ -125,12 +245,74 @@ input, select, textarea { font-family: inherit; }
   }
 }
 
-/* ---- Mono numerals for amounts, dates, IDs ---- */
-.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+/* =========================================================
+   UTILITY CLASSES
+   ========================================================= */
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
 
-/* ---- Utility: visually-hidden ---- */
 .vh {
   position: absolute; width: 1px; height: 1px;
   padding: 0; margin: -1px; overflow: hidden;
   clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- Skeleton loading animation ---- */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--gray-200) 25%,
+    var(--gray-100) 50%,
+    var(--gray-200) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease infinite;
+  border-radius: var(--r-md);
+}
+
+/* ---- Fade in animation ---- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn var(--dur-med) var(--ease) forwards;
+}
+
+/* ---- Slide in from right (toasts, notifications) ---- */
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(100%); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ---- Slide in from top ---- */
+@keyframes slideInDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Pulse for notification dot ---- */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.4); opacity: 0.7; }
+}
+
+/* ---- Scale up ---- */
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
 }

@@ -1,0 +1,27 @@
+.sort-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0 2px;
+  cursor: pointer;
+  color: inherit;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.sort-indicator:hover .sort-icon {
+  color: var(--primary);
+}
+
+.sort-icon {
+  display: inline-block;
+  color: var(--text-secondary);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.sort-icon--inactive {
+  color: var(--text-muted);
+  opacity: 0.6;
+}

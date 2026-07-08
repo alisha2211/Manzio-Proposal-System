@@ -1,26 +1,16 @@
-import React from 'react';
-import { STATUS_META } from '../data/mockData.js';
+import { STATUS_META } from '../utils/helpers.js';
 
-export default function StatusBadge({ status }) {
-  const meta = STATUS_META[status];
-  if (!meta) return null;
+export default function StatusBadge({ status, size = 'md' }) {
+  const meta = STATUS_META[status] || STATUS_META.draft;
   return (
     <span
+      className={`status-badge status-badge--${size}`}
       style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: 6,
-        padding: '3px 9px',
-        borderRadius: 'var(--r-sm)',
-        fontSize: 'var(--text-xs)',
-        fontWeight: 600,
         color: meta.color,
         background: meta.bg,
-        whiteSpace: 'nowrap',
-        letterSpacing: '0.01em',
       }}
     >
-      <span style={{ width: 6, height: 6, borderRadius: '50%', background: meta.color, flexShrink: 0 }} />
+      <span className="status-badge-dot" style={{ background: meta.color }} />
       {meta.label}
     </span>
   );

@@ -93,9 +93,17 @@
 .portal-switcher-item span:last-child { font-size: var(--text-xs); font-weight: 600; }
 .portal-switcher-item.is-active { border-color: var(--ink); background: var(--paper-dim); }
 
+.portal-switcher-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 @media (max-width: 980px) {
   .portal-shell { flex-direction: column-reverse; }
-  .portal-switcher { width: 100%; flex-direction: row; overflow-x: auto; }
+  .portal-switcher { width: 100%; flex-direction: column; }
+  .portal-switcher-list { flex-direction: row; overflow-x: auto; padding-bottom: 8px; }
+  .portal-switcher-item { min-width: 200px; flex-shrink: 0; }
   .portal-grid { grid-template-columns: 1fr; }
   .portal-body { padding: 24px 20px; }
 }

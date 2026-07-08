@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext.jsx';
-import { getClient, getOwner, computeTotals, fmtMoney } from '../data/mockData.js';
+import { computeTotals, fmtMoney } from '../utils/helpers.js';
 import { Card, PageHeader, Button, Avatar, EmptyState } from '../components/ui.jsx';
 import './Approvals.css';
 
 export default function Approvals() {
-  const { proposals, updateProposalStatus, pushToast } = useApp();
+  const { proposals, updateProposalStatus, pushToast, clients, users } = useApp();
   const [rejectingId, setRejectingId] = useState(null);
   const [note, setNote] = useState('');
 
@@ -40,8 +40,8 @@ export default function Approvals() {
       ) : (
         <div className="appr-list">
           {pending.map(p => {
-            const client = getClient(p.client);
-            const owner = getOwner(p.owner);
+            const client = p.client === 'custom' ? p.customClient : clients.find(c => String(c.id) === String(p.client)) || null;
+            const owner = users.find(u => String(u.id) === String(p.owner)) || { name: 'Unknown', avatarColor: '#94A3B8' };
             const totals = computeTotals(p);
             return (
               <Card className="appr-card" key={p.id}>
@@ -86,7 +86,7 @@ export default function Approvals() {
         <div className="ui-modal-overlay" onClick={() => setRejectingId(null)}>
           <div className="ui-modal" onClick={e => e.stopPropagation()}>
             <h2 className="pd-modal-title">Reject this proposal?</h2>
-            <p className="pd-modal-desc">Leave a comment for the Sales Executive.</p>
+            <p className="pd-modal-desc">Leave a comment for the proposal owner.</p>
             <textarea
               className="pd-modal-textarea"
               rows={4}

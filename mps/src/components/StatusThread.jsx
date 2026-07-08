@@ -1,5 +1,5 @@
 import React from 'react';
-import { STAGES, OFF_PATH_STAGES, STATUS_META } from '../data/mockData.js';
+import { STAGES, OFF_PATH_STAGES, STATUS_META } from '../utils/helpers.js';
 import './StatusThread.css';
 
 /**

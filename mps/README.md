@@ -4,7 +4,7 @@ A complete React + Vite frontend for Manzio's internal proposal management tool,
 
 ## What this is
 
-This is the **frontend only** — a fully interactive UI with realistic mock data, role-based views, and all the screens a Sales Executive, Manager, or Admin would use day to day. There is no backend; all data lives in `src/data/mockData.js` and in-memory React state (`src/context/AppContext.jsx`), so changes reset on page refresh.
+This is the **frontend only** — a fully interactive UI with realistic mock data, role-based views, and all the screens a  Manager, or Admin would use day to day. There is no backend; all data lives in `src/data/mockData.js` and in-memory React state (`src/context/AppContext.jsx`), so changes reset on page refresh.
 
 ## Getting started
 

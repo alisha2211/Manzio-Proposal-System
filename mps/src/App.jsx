@@ -1,4 +1,3 @@
-import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { AppProvider, useApp } from './context/AppContext.jsx';
 import Shell from './components/Shell.jsx';
@@ -18,7 +17,15 @@ import ClientPortal from './pages/ClientPortal.jsx';
 import Settings from './pages/Settings.jsx';
 
 function Routed() {
-  const { isLoggedIn, login, toasts } = useApp();
+  const { isLoggedIn, login, toasts, loadingSession } = useApp();
+
+  if (loadingSession) {
+    return (
+      <div className="login-root" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
+        <div style={{ color: 'var(--text-primary)', fontFamily: 'Inter', fontSize: 16 }}>Loading workspace...</div>
+      </div>
+    );
+  }
 
   // Show login screen when user is not authenticated
   if (!isLoggedIn) {
